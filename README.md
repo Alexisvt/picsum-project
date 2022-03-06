@@ -6,6 +6,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
+### `npm run build:run`
+
+This script is necessary to run the project; otherwise, it will not work because Im not sharing the AWS credentials.
+
 ### `npm start`
 
 Runs the app in the development mode.\
