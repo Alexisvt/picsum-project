@@ -12,7 +12,7 @@ const PhotoContainer = () => {
 
   // fetch picsum photos
   useGetPicsumPhotoLisQuery({
-    limit: 10,
+    limit: +(process.env.REACT_APP_API_RESULT_LIMIT || 10),
   });
 
   // fetching other images from S3
