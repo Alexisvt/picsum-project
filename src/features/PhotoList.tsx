@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { PicsumPhoto } from '../app/services/types';
+import FileUploader from '../components/FileUploader';
 import ImageContainer from '../components/ImageContainer';
 import { selectPhotoList, setSelected } from './PhotoSlice';
 
@@ -13,6 +14,8 @@ const PhotoList = () => {
     dispatch(setSelected(photo));
   };
 
+  const handleChange = (file: File) => {};
+
   const photos = photoList.map((photo) => (
     <ImageContainer
       src={photo.download_url}
@@ -23,7 +26,12 @@ const PhotoList = () => {
     />
   ));
 
-  return <Container>{photos}</Container>;
+  return (
+    <Container>
+      <FileUploader onFileChange={handleChange} />
+      {photos}
+    </Container>
+  );
 };
 
 const Container = styled.div`
