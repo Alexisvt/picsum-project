@@ -1,15 +1,14 @@
 import { useEffect } from 'react';
 import styled from 'styled-components';
 
-import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { useAppDispatch } from '../app/hooks';
 import { useGetPicsumPhotoLisQuery } from '../app/services/picsumAPI';
 import PhotoList from './PhotoList';
-import { fetchImagesFromS3, selectPhotoStatus } from './PhotoSlice';
+import { fetchImagesFromS3 } from './PhotoSlice';
 import SelectedPhoto from './SelectedPhoto';
 
 const PhotoContainer = () => {
   const dispatch = useAppDispatch();
-  const status = useAppSelector(selectPhotoStatus);
 
   // fetch picsum photos
   useGetPicsumPhotoLisQuery({
@@ -24,14 +23,8 @@ const PhotoContainer = () => {
 
   return (
     <Container>
-      {status === 'loading' ? (
-        <div>Loading...</div>
-      ) : (
-        <>
-          <PhotoList />
-          <SelectedPhoto />
-        </>
-      )}
+      <PhotoList />
+      <SelectedPhoto />
     </Container>
   );
 };

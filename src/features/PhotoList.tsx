@@ -4,11 +4,12 @@ import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { PicsumPhoto } from '../app/services/types';
 import FileUploader from '../components/FileUploader';
 import ImageContainer from '../components/ImageContainer';
-import { selectPhotoList, setSelected, uploadNewPic } from './PhotoSlice';
+import { selectPhotoList, selectPhotoStatus, setSelected, uploadNewPic } from './PhotoSlice';
 
 const PhotoList = () => {
   const dispatch = useAppDispatch();
   const photoList = useAppSelector(selectPhotoList);
+  const status = useAppSelector(selectPhotoStatus);
 
   const handleClick = (photo: PicsumPhoto) => {
     dispatch(setSelected(photo));
@@ -30,8 +31,14 @@ const PhotoList = () => {
 
   return (
     <Container>
-      <FileUploader onFileChange={handleChange} />
-      {photos}
+      {status === 'loading' ? (
+        <div>Loading...</div>
+      ) : (
+        <>
+          <FileUploader onFileChange={handleChange} />
+          {photos}
+        </>
+      )}
     </Container>
   );
 };
