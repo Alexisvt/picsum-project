@@ -1,0 +1,17 @@
+{
+  "resourceName": "s364faf808",
+  "policyUUID": "64faf808",
+  "bucketName": "picsumproject507c141e3fef40668e15614783b8869c",
+  "storageAccess": "authAndGuest",
+  "guestAccess": [
+    "CREATE_AND_UPDATE",
+    "READ"
+  ],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "triggerFunction": "NONE",
+  "groupAccess": {}
+}
