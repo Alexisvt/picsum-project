@@ -10,12 +10,6 @@
       "StackName": "amplify-picsumproject-dev-101030",
       "StackId": "arn:aws:cloudformation:us-east-1:242503518365:stack/amplify-picsumproject-dev-101030/f4326b20-9d67-11ec-b1cc-125b67dd3e6f",
       "AmplifyAppId": "d2nojrnd5963ye"
-    },
-    "categories": {
-      "auth": {
-        "picsumproject5bd43204": {},
-        "true": {}
-      }
     }
   }
 }
