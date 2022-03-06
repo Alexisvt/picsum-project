@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { PicsumPhoto } from '../app/services/types';
 import FileUploader from '../components/FileUploader';
 import ImageContainer from '../components/ImageContainer';
-import { selectPhotoList, setSelected } from './PhotoSlice';
+import { selectPhotoList, setSelected, uploadNewPic } from './PhotoSlice';
 
 const PhotoList = () => {
   const dispatch = useAppDispatch();
@@ -14,7 +14,9 @@ const PhotoList = () => {
     dispatch(setSelected(photo));
   };
 
-  const handleChange = (file: File) => {};
+  const handleChange = (file: File) => {
+    dispatch(uploadNewPic(file));
+  };
 
   const photos = photoList.map((photo) => (
     <ImageContainer
