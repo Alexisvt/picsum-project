@@ -36,6 +36,4 @@ test('fetches and receives photos from Picsum', async () => {
   expect(imageElements.length).toBe(2);
   expect(imageElements[0].src).toBe(PicsumPhotoList[0].download_url);
   expect(imageElements[1].src).toBe(PicsumPhotoList[1].download_url);
-
-  // screen.debug();
 });
