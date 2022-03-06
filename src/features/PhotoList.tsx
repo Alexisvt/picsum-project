@@ -1,14 +1,26 @@
 import styled from 'styled-components';
 
-import { useAppSelector } from '../app/hooks';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { PicsumPhoto } from '../app/services/types';
 import ImageContainer from '../components/ImageContainer';
-import { selectPhotoList } from './PhotoSlice';
+import { selectPhotoList, setSelected } from './PhotoSlice';
 
 const PhotoList = () => {
+  const dispatch = useAppDispatch();
   const photoList = useAppSelector(selectPhotoList);
 
+  const handleClick = (photo: PicsumPhoto) => {
+    dispatch(setSelected(photo));
+  };
+
   const photos = photoList.map((photo) => (
-    <ImageContainer src={photo.download_url} key={photo.id} />
+    <ImageContainer
+      src={photo.download_url}
+      key={photo.id}
+      onClick={() => {
+        handleClick(photo);
+      }}
+    />
   ));
 
   return <Container>{photos}</Container>;
