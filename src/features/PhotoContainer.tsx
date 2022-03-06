@@ -1,18 +1,26 @@
+import { useEffect } from 'react';
 import styled from 'styled-components';
 
-import { useAppSelector } from '../app/hooks';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { useGetPicsumPhotoLisQuery } from '../app/services/picsumAPI';
 import PhotoList from './PhotoList';
-import { selectPhotoStatus } from './PhotoSlice';
+import { fetchImagesFromS3, selectPhotoStatus } from './PhotoSlice';
 import SelectedPhoto from './SelectedPhoto';
 
 const PhotoContainer = () => {
+  const dispatch = useAppDispatch();
   const status = useAppSelector(selectPhotoStatus);
 
   // fetch picsum photos
   useGetPicsumPhotoLisQuery({
     limit: 10,
   });
+
+  // fetching other images from S3
+  useEffect(() => {
+    dispatch(fetchImagesFromS3());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Container>
