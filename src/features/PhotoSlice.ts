@@ -6,10 +6,11 @@ import { RootState } from '../app/store';
 
 export interface PhotoState {
   list: PicsumPhoto[];
+  selected: PicsumPhoto | null;
   status: 'idle' | 'loading';
 }
 
-const initialState: PhotoState = { list: [], status: 'idle' };
+const initialState: PhotoState = { list: [], selected: null, status: 'idle' };
 
 export const PHOTO_NAMESPACE = 'photo';
 
@@ -19,6 +20,9 @@ const photoSlice = createSlice({
   reducers: {
     addPhoto(state, action: PayloadAction<PicsumPhoto>) {
       state.list.push(action.payload);
+    },
+    setSelected(state, action: PayloadAction<PicsumPhoto | null>) {
+      state.selected = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -34,10 +38,11 @@ const photoSlice = createSlice({
 });
 
 // exporting actions
-export const { addPhoto } = photoSlice.actions;
+export const { addPhoto, setSelected } = photoSlice.actions;
 
 // exporting selectors
 export const selectPhotoList = (state: RootState) => state.photo.list;
 export const selectPhotoStatus = (state: RootState) => state.photo.status;
+export const selectSelectedPhoto = (state: RootState) => state.photo.selected;
 
 export default photoSlice.reducer;
