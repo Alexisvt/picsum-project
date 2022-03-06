@@ -1,8 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/dist/query';
 
+import { baseAPIConfig } from './services/baseAPIConfig';
+
 const store = configureStore({
-  reducer: {},
+  reducer: {
+    [baseAPIConfig.reducerPath]: baseAPIConfig.reducer,
+  },
+  // Adding the api middleware enables caching, invalidation, polling,
+  // and other useful features of `rtk-query`.
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(baseAPIConfig.middleware),
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
