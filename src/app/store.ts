@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/dist/query';
 
+import photoReducer, { PHOTO_NAMESPACE } from '../features/PhotoSlice';
 import { baseAPIConfig } from './services/baseAPIConfig';
 
 const store = configureStore({
   reducer: {
     [baseAPIConfig.reducerPath]: baseAPIConfig.reducer,
+    [PHOTO_NAMESPACE]: photoReducer,
   },
   // Adding the api middleware enables caching, invalidation, polling,
   // and other useful features of `rtk-query`.
