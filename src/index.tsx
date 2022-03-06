@@ -1,12 +1,16 @@
 import './index.css';
 
+import Amplify from 'aws-amplify';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
 import App from './App';
 import store from './app/store';
+import config from './aws-exports';
 import reportWebVitals from './reportWebVitals';
+
+Amplify.configure(config);
 
 ReactDOM.render(
   <React.StrictMode>
