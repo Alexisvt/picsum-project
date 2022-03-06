@@ -2,6 +2,20 @@ import { PicsumPhotoList } from '../utils/test_elements';
 import { render, screen } from '../utils/test_helpers';
 import PhotoList from './PhotoList';
 
+test('should show loading', () => {
+  render(<PhotoList />, {
+    preloadedState: {
+      photo: {
+        status: 'loading',
+        list: [],
+        selected: null,
+      },
+    },
+  });
+
+  expect(screen.getByText('Loading...')).toBeInTheDocument();
+});
+
 test('should render two photos', () => {
   render(<PhotoList />, {
     preloadedState: {

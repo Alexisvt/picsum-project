@@ -16,10 +16,10 @@ const PhotoContainer = () => {
   });
 
   // fetching other images from S3
-  useEffect(() => {
-    dispatch(fetchImagesFromS3());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // useEffect(() => {
+  //   dispatch(fetchImagesFromS3());
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   return (
     <Container>
