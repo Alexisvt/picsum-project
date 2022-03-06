@@ -35,7 +35,7 @@ const photoSlice = createSlice({
       .addCase(fetchImagesFromS3.fulfilled, (state, action) => {
         const generatedPics = generatePicsumPhotos(action.payload);
 
-        // add the new list of persons to the state
+        // add the new list of PicsumPhotos to the state
         state.list = [...state.list, ...generatedPics];
         state.status = 'idle';
       });
@@ -47,7 +47,7 @@ const photoSlice = createSlice({
       .addCase(uploadNewPic.fulfilled, (state, { payload }) => {
         const newGeneratedPic = generatePicsumPhoto(payload);
 
-        // add the new list of persons to the state
+        // add the new PicsumPhoto to the state
         state.list.push(newGeneratedPic);
         state.status = 'idle';
       });
