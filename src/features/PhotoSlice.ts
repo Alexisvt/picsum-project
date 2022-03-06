@@ -72,7 +72,7 @@ export const fetchImagesFromS3 = createAsyncThunk(
 );
 
 export const uploadNewPic = createAsyncThunk(
-  `${PHOTO_NAMESPACE}/addPersonFromOtherSource`,
+  `${PHOTO_NAMESPACE}/uploadNewPic`,
   async (file: File) => {
     // upload the image to AWS S3
     const result = await uploadFile(file);
