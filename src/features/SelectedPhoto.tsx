@@ -46,6 +46,13 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  grid-row: 1;
+  height: 50vh;
+
+  @media (min-width: 600px) {
+    grid-column: 2;
+    height: auto;
+  }
 `;
 
 export default SelectedPhoto;
