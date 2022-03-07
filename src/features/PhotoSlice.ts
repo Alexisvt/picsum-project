@@ -58,6 +58,8 @@ const photoSlice = createSlice({
       })
       .addMatcher(picsumAPI.endpoints.getPicsumPhotoLis.matchFulfilled, (state, action) => {
         state.list = action.payload;
+
+        state.list = [...state.list, ...action.payload];
         state.status = 'idle';
       });
   },
