@@ -5,11 +5,14 @@ import { baseAPIConfig } from '../app/services/baseAPIConfig';
 import store from '../app/store';
 import { PicsumPhotoList } from '../utils/test_elements';
 import { render, screen } from '../utils/test_helpers';
+import { fetchImages } from './aws';
 import PhotoContainer from './PhotoContainer';
+
+jest.mock('./aws');
 
 export const handlers = [
   rest.get(`https://picsum.photos/v2/list`, (req, res, ctx) => {
-    return res(ctx.json(PicsumPhotoList), ctx.delay(150));
+    return res(ctx.json(PicsumPhotoList), ctx.delay(0));
   }),
 ];
 
@@ -28,12 +31,24 @@ afterEach(() => {
   store.dispatch(baseAPIConfig.util.resetApiState());
 });
 
-test('fetches and receives photos from Picsum', async () => {
-  render(<PhotoContainer />);
+test('fetches and receives photos from Picsum and AWS Storage', (done) => {
+  (fetchImages as jest.Mock).mockImplementation(() =>
+    // this mock the AWS response
+    Promise.resolve(['http://placeimg.com/640/480/nature'])
+  );
+  render(<PhotoContainer />, {
+    preloadedState: {
+      photo: {
+        list: [],
+        status: 'idle',
+        selected: null,
+      },
+    },
+  });
 
-  const imageElements = (await screen.findAllByRole('img')) as HTMLImageElement[];
-
-  expect(imageElements.length).toBe(2);
-  expect(imageElements[0].src).toBe(PicsumPhotoList[0].download_url);
-  expect(imageElements[1].src).toBe(PicsumPhotoList[1].download_url);
+  setTimeout(() => {
+    const imageElements = screen.getAllByRole('img') as HTMLImageElement[];
+    expect(imageElements.length).toBe(3);
+    done();
+  }, 100);
 });
